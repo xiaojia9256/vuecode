@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue.extend 构造器</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>vue.extend 扩张实例构造器</h1>
+    <hr>
+   <div id="author"></div>
+   <!--自定义标签 author  -->
+   <author></author>
+    <script>
+      
+            //扩展  vue.txtend  全局的API 是大写开头的    var authorUrl = Vue.extend({这里是对象})
+            var authorUrl = Vue.extend({
+                // 模板         标签上的属性是需要绑定的
+                template:"<p><a :href='authorURL' target='_blank'>{{authorName}}</a></p>",
+                //渲染  一个匿名对象
+                data:function(){
+                    // return 一个对象
+                return{
+                    authorName:'COCO',
+                    authorURL:'http://www.taodekuai.cn'
+                }
+            }
+            });
+            
+            //加载调用  $mount 手动挂载
+
+            // 直接用标签加载
+            new authorUrl().$mount('author');
+            // id加载  建议用这个
+            new authorUrl().$mount('#author');
+            
+      
+
+    </script>
+</body>
+
+</html>

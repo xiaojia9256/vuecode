@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mixins 混入选项操作</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>mixins混入选项操作</h1>
+    <hr>
+    <div id="app">
+        {{num}}
+        <p><button @click='add'>add</button></p>
+    </div>
+    <script>
+        
+     
+        //额外临时加入时，用于显示日志
+        var addLog = {
+            updated: function () {
+                console.log("数据发生变化，点击后变化成 " + this.num + "。")
+            }
+        }
+        
+        //全局的先执行，混入的后执行  全局不加s
+        Vue.mixin({
+            updated: function () {
+                console.log("我是全局的混入")
+            }
+        })
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                num: 1
+            },
+            methods: {
+                add: function () {
+                    return this.num++;
+                }
+            },
+            //  mixins的调用顺序 先执行mixins 
+            updated: function () {
+                console.log("构造器里的updated方法。")
+            },
+            //  1.普通写法
+            mixins: [addLog] //混入
+        })
+
+
+
+        //  Mixins一般有两种用途：
+        // 1、在你已经写好了构造器后，需要增加方法或者临时的活动时使用的方法，这时用混入会减少源代码的污染。
+        // 2、很多地方都会用到的公用方法，用混入的方法可以减少代码量，实现代码重用。
+
+        //  mixins 的调用顺序
+        //  从执行的先后顺序来说，都是混入的先执行，然后构造器里的再执行，需要注意的是，这并不是方法的覆盖，而是被执行了两边。
+
+        //  PS：当混入方法和构造器的方法重名时，混入的方法无法展现，也就是不起作用。
+    </script>
+</body>
+
+</html>

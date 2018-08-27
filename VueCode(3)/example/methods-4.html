@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>methods中的$event参数
+    </title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>methods中的$event参数</h1>
+    <hr>
+    <div id="app">
+        {{a}}
+        <p><button @click="add(2)">add 每次+2</button></p>
+        <!-- native 调用构造器的原始方法 -->
+        <p>
+            <btn @click.native='add(3)'></btn>
+        </p>
+    </div>
+     <!-- 外部的只能用 onclick -->
+    <button onclick="app.add(4)">我是外部的add 每次+4</button>
+
+    <script>
+        var btn = {
+            template: `<button>我是用native调用的 每次+3</button>`
+        }
+        var app = new Vue({
+            el: "#app",
+            data: {
+                a: 1,
+            },
+            components: {
+                "btn": btn
+            },
+            methods: {
+                add: function (num) {
+                    if (num != "") {
+                        this.a += num;
+                    } else {
+                        this.a++;
+                    }
+
+                }
+            }
+
+        })
+        //  native 调用构造器的原始方法
+    </script>
+</body>
+
+</html>

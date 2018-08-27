@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component 父子组件</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>component 父子组件</h1>
+    <hr>
+    <div id="app">
+        <coco></coco>
+    </div>
+    <script>
+        // 父子的组件 需要按顺序来
+        // 子组件
+        var cocoCity={
+            template:`<p style='color:green'>COCO is my like</p>`
+        }
+        // 父组件
+        var cocoComponent ={
+            template:`
+            <div style='color:red'>
+            <p> coco from France</p>
+            <city></city>
+            </div>`,
+            components:{
+                "city":cocoCity
+            }
+        }
+        // 构造器
+        var app = new Vue({
+            el: '#app',
+            components:{
+                'coco':cocoComponent
+            }
+        })
+      
+    </script>
+</body>
+
+</html>

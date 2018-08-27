@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>computed Option  计算选项</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>computed Option  计算选项</h1>
+    <hr>
+    <div id="app" >
+    <p style="font-size:20px;color:pink">{{newPrice}}</p> 
+     <ul>
+         <li v-for="item in NEWS">{{item.title}}----{{item.date}}</li>
+     </ul>
+    </div>
+
+    <script>
+      var newsList=[
+          {title:'[可可西里保护报告]小藏羚羊的未婚奶爸',date:'2017/3/10'},
+          {title:'奥巴马的新家，价值4000万，月租金16万~',date:'2017/3/11'},
+          {title:'奥巴马送女儿上哈佛 夫妇二人被目睹不舍落泪气氛温馨',date:'2017/3/12'},
+          {title:'《权力的游戏》取景地——西班牙龙石岛吸引大批游客',date:'2017/3/13'},
+          {title:'加拿大华裔女童案凶手或现身葬礼 警方征录像缉凶',date:'2017/3/14'}
+      ]
+
+     var app = new Vue({
+         el:"#app",
+         data:{
+             price:100,
+             newsList:newsList
+         },
+         computed:{
+            newPrice:function(){
+                return '￥'+ this.price +' 元';
+                //  return this.price ='￥'+ this.price +' 元';
+             },
+             NEWS:function(){
+                 return this.newsList.reverse()
+             }
+         }
+     })
+    
+    </script>
+</body>
+</html>

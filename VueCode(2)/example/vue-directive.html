@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue-directive</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>Vue.directive API</h1>
+    <hr>
+    <div id="app">
+        <p v-tby='color'>{{num}}</p>
+        <p><button @click='add'>add</button></p>
+        <p><button onclick='unbind()'>解绑</button></p>
+    </div>
+    <!--分割线  -->
+    <script>
+        //API 
+        // el 是DOM 元素
+        // bingding 是对象
+        // vnode 
+        //    Vue.directive('tby',function(el,binding,vnode){
+        //        console.log(el);
+        //        console.log(binding);
+        //        console.log(vnode);
+        //        el.style='color:'+binding.value
+        //    })
+
+        // 解绑
+        function unbind() {
+            app.$destroy();
+        }
+        Vue.directive('tby', {
+            bind: function (el, binding) { //被绑定
+                el.style = 'color:' + binding.value;
+                console.log('1 - bind  -- 被绑定');
+            },
+            inserted: function () { //绑定到节点
+                console.log('2 - inserted  -- 绑定到节点');
+            },
+            update: function () { //组件更新
+                console.log('3 - update  -- 组件更新');
+            },
+            componentUpdated: function () { //组件更新完成
+                console.log('4 - componentUpdated  -- 组件更新完成');
+            },
+            unbind: function () { //解绑
+                console.log('5 - unbind  -- 解绑');
+            }
+        })
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                num: 10,
+                color: 'red',
+            },
+            methods: {
+                add: function () {
+                    this.num++;
+                }
+            }
+
+        })
+    </script>
+
+</body>
+
+</html>

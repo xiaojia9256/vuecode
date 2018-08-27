@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component 组件</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>component组件</h1>
+    <hr>
+    <!-- 作用域 -->
+    <div id="app">
+        <abc></abc>
+    </div>
+    <div id="add">
+        <coco></coco>
+    </div>
+    <script>
+        // 1.注册全局组件
+        Vue.component('abc', {
+            template: `<div style="color:red">我是全局app组件</div>`
+        })
+
+        // 1.构造器
+        var app = new Vue({
+            el: '#app'
+        })
+
+        // 局部定义组件
+        var add = new Vue({
+            el: '#add',
+            // 可以定义多个组件
+            components:{
+                "coco":{
+                    template: `<div style="color:pink">我是局部add组件</div>`
+                }
+            }
+        })
+        // 定义全局的的组件要放在Vue的作用域里
+
+
+
+        // 局部注册组件局部注册组件和全局注册组件是向对应的，局部注册的组件只能在组件注册的作用域里进行使用，其他作用域使用无效。
+    </script>
+</body>
+
+</html>

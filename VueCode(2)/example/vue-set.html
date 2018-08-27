@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.set</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>Vue.set 的例子</h1>
+    <hr>
+    <!--作用域  -->
+    <div id="app">
+     {{count}}
+     <ul>
+         <li v-for="item in arr">{{item}}</li>
+     </ul>
+    </div>
+
+     <!--作用域外部  -->
+     <p><button onclick="add()">添加</button></p>
+
+    <script>
+        function add(){
+            //用Vue.set改变，只能添加一次 
+            // Vue.set(outDate,'count',2)
+            //Vue对象方法添加，能持续点击添加
+            // app.count++;
+            //直接操作外部数据，用outDate对象
+            // outDate.count++;
+            //改变数组 当点击的时候 'bbb' 改变成 'qqq'  这个方法需要和 outDate.count++; 同用
+            // app.arr[1]='qqq';
+
+            //用vue.set的方式
+            Vue.set(app.arr,1,'我是被改变的')
+        }
+
+        // 在构造器外部申明数据
+        var outDate ={
+            count:1,
+            arr:['aaa','bbb','ccc']
+            
+        }
+
+        // 内部定义 data
+        var app = new Vue({
+            el:'#app',
+            //引用外部数据
+            data:outDate
+        })
+    </script>
+</body>
+
+</html>
+<!-- 
+        1.在构造器外面声明数据 然后赋值给构造器
+        2.用三种方法改变数值
+ -->

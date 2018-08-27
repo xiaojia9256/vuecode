@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>template 模板</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>template模板</h1>
+    <hr>
+    <div id="app">
+       {{message}}
+    </div>
+    <!--2.标签里面建模板  -->
+    <template id="add2">
+            <h4 style="color:blue">我是标签模板</h4>
+    </template>
+
+    <!-- 3.script 模板 -->
+    <script type="x-template" id="add3">
+            <h4 style="color:pink">我是标签模板</h4>
+    </script>
+    <script>
+        var app = new Vue({
+            el:'#app',
+            data:{
+                message:"清风徐来"
+            },
+            //1.选项里建模板       template:``  
+            // template:` 
+            // <p style="color:red">我是模板</p>
+            // `
+
+            // 2.标签模板
+            // template:"#add2"
+
+            // 3.script标签模板
+            template:"#add3"
+        })
+    </script>
+</body>
+</html>

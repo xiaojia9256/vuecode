@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component 标签</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>component标签</h1>
+    <hr>
+    <div id="app">
+        <!-- v-bind 的简写 ：is -->
+        <component :is="componentId"></component>
+        <br>
+        <div>
+            <!-- v-on 的简写 @click -->
+            <button @click="changeComponent">changeComponent</button>
+        </div>
+                 
+    </div>
+    <script>
+        var cocoA={
+            template:`<div style="color:red;">我red</div>`
+        } 
+        var cocoB={
+            template:`<div style="color:green;">你green</div>`
+        }
+        var cocoC={
+            template:`<div style="color:#666;">她#fff</div>`
+        }
+
+        // 局部定义组件
+        var app = new Vue({
+            el: '#app',
+            data:{
+                componentId:'cocoA'
+            },
+            // 可以定义多个组件
+            components:{
+                "cocoA":cocoA,
+                "cocoB":cocoB,
+                "cocoC":cocoC, 
+            },
+            // 声明方法
+            methods: {
+                changeComponent:function(){
+                    if(this.componentId=="cocoA"){
+                        this.componentId="cocoB";
+                    }else if(this.componentId=="cocoB"){
+                        this.componentId ="cocoC";
+                    }else{
+                         this.componentId="cocoA";
+                    }
+                }
+            }
+        })
+        // component 可以动态的根据data 值声明，不同的组件
+    </script>
+</body>
+
+</html>

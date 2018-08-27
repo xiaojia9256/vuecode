@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>propsData Option  全局扩展的数据传递</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>propsData Option  全局扩展的数据传递</h1>
+    <hr>
+    <!--1.扩展-->
+    <header></header>
+    <!--2.扩展 -->
+    <nav></nav>
+
+    <script>
+    //   1.部分
+     var header_a=Vue.extend({
+        template:`<p style='color:pink'>{{message}}</p>`,
+        data:function () {
+            return {
+                message:'我是扩张的pink',
+            }
+        }
+     });
+    //  挂载
+     new header_a().$mount('header');
+   
+   
+    // 2.部分
+    var nav_b=Vue.extend({
+        template:`<p style='color:green'>{{message}}-{{a}}</p>`,
+        data:function () {
+            return {
+                message:'我是扩展的pink',
+            }
+        },
+        props:['a']
+     });  
+     //  挂载   
+     new nav_b({propsData:{a:12}}).$mount('nav');
+    </script>
+</body>
+</html>

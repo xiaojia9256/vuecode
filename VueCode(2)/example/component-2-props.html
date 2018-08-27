@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>component props 实例</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+<body>
+    <h1>component  props 属性设置 </h1>
+    <hr>
+    <div id="app">
+        <!-- 1. 定义属性并获取值 -->
+       <coco here='France'></coco>
+       <!--2. 中间带“—” “_” 用大小驼峰的方法-->
+       <coco from-here='珊瑚海'></coco>
+
+       <!--3. v-bind的方式  简写 ‘：’-->
+       <coco :here='message' style="color:aqua"></coco>
+    </div>
+
+    <!-- 分割线 -->
+    <script>
+     var app = new Vue({
+         el:"#app",
+        // 3.3 构造器 像组件传值
+         data:{
+            message:"大溪地"
+         },
+        //  1.1 定义属性并获取值 
+         components: {
+             "coco":{
+                //  局部组件
+                 template:"<div style='color:red'>coco 香奈儿 form {{here}} {{fromHere}} </div>",
+                // 挂载属性   选项例如：el data components props
+                // props 跟的是数组 也有多个属性
+                                // 2.2 驼峰命名
+                props:['here','fromHere']
+             }
+         }
+        
+     })
+    </script>
+</body>
+</html>

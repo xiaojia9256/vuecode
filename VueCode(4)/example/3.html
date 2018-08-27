@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>实例事件</title>
+    <script src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>实例事件</h1>
+    <hr>
+    <div id="app">
+        {{num}}
+
+        <p><button @click="add">add ++ </button> </p>
+        <!-- <p><button @click="reduce">reduce</button></p> -->
+
+    </div>
+
+    <!-- 外部方法  -->
+    <p><button onclick="reduce()">reduce --</button></p>
+     <!-- 只执行一次 -->
+    <p><button onclick="reduceOnce()">reduceOnce ++</button></p>
+
+    <!-- 关闭 -->
+    <p><button onclick="off()">off 关闭方法 </button></p>
+    
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                num: 1
+            },
+            methods: {
+                add: function () {
+                    return this.num++;
+                },
+                // reduce: function () {
+                //     console.log("我是执行了reduce啦！");
+                //     if (this.num >= 1) {
+                //         this.num--;
+                //     } else {
+                //         alert("等于0咯 不想减了");
+                //         this.num = 0
+                //     }
+                // }
+            }
+
+        })
+        // 实例事件就是在构造器外部写一个调用构造器内部的方法。好处是可以通过在构造器外部调用构造器内部的数据。
+        // $on 在构造器外部添加事件
+        // 1.$on 接收两个参数，第一个：调用时的事件名称  第二个：参数的匿名方法
+        app.$on('reduce', function () {
+            console.log("我是执行了reduce啦！");
+            if (this.num >= 1) {
+                this.num--;
+            } else {
+                alert("等于0咯 不想减了");
+                this.num = 0
+            }
+        });
+        // 1.外部调用内部事件  按钮在作用域外部，可以利用$emit来执行
+        function reduce() {
+            app.$emit('reduce');
+        }
+        // 2.只执行一次
+        app.$once('reduceOnce',function(){
+            console.log('我是只执行一次的哦！');
+            this.num++;
+        })
+        // 2.$emit 调用
+        function reduceOnce(){
+            app.$emit('reduceOnce');
+        }
+
+        // 3.关闭事件
+        function off(){
+            app.$off('reduce');
+        }
+    </script>
+</body>
+
+</html>
